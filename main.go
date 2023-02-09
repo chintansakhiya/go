@@ -7,12 +7,15 @@ import (
 func main() {
 
 	port := 8080
-	startsserver(port)
+	isstarted := startsserver(port)
+	fmt.Println(isstarted)
 
 }
 
-func startsserver(p int) {
+func startsserver(p int) bool {
 
-	fmt.Println(p)
+	fmt.Println("server started on ", p)
+
+	return true
 
 }
