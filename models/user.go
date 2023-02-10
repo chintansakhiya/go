@@ -1,27 +1,27 @@
-package models
+// package models
 
-type User struct {
-	ID        int
-	Firstname string
-	Lastname  string
-}
+// type User struct {
+// 	ID        int
+// 	Firstname string
+// 	Lastname  string
+// }
 
-var (
-	users  []*User
-	nextID = 1
-)
+// var (
+// 	users  []*User
+// 	nextID = 1
+// )
 
-func GetUsers() []*User {
+// func GetUsers() []*User {
 
-	return users
+// 	return users
 
-}
+// }
 
-func AddUser(u User) (User, error) {
+// func AddUser(u User) (User, error) {
 
-	u.ID = nextID
-	nextID++
-	users = append(users, &u)
+// 	u.ID = nextID
+// 	nextID++
+// 	users = append(users, &u)
 
-	return u, nil
-}
+// 	return u, nil
+// }

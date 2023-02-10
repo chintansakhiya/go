@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/chintansakhiya/controllers"
@@ -8,6 +9,7 @@ import (
 
 func main() {
 	controllers.RegisterController()
-	http.ListenAndServe(":3000", nil)
+	fmt.Println("in main")
+	http.ListenAndServe(":3030", nil)
 
 }
