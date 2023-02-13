@@ -2,25 +2,29 @@ package main
 
 import (
 	"fmt"
+)
 
-	"github.com/chintansakhiya/models"
+const (
+	i = iota
 )
 
 func main() {
+	a := 0
 
-	u := models.User{
-		ID:        2,
-		Firstname: "chintan",
-		Lastname:  "sakhiya",
+	x := sum(10, a)
+
+	fmt.Println(x)
+
+}
+
+func sum(i, a int) func(int) int {
+
+	a = a + i
+	if i == 0 {
+		return func(int) int {
+			i = a
+		}
 	}
-	var w models.User
-	w = u
-	fmt.Println(u)
-
-	j := []models.User{}
-
-	j = append(j, u, w)
-
-	fmt.Println(j)
-
+	i = i - 1
+	return sum(i, a)
 }
