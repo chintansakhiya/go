@@ -9,22 +9,13 @@ const (
 )
 
 func main() {
-	a := 0
 
-	x := sum(10, a)
+	x := 10
 
-	fmt.Println(x)
+	y := &x
+	z := &y
+	a := &z
 
-}
+	fmt.Println(x, y, z, *y, **z, ***a)
 
-func sum(i, a int) func(int) int {
-
-	a = a + i
-	if i == 0 {
-		return func(int) int {
-			i = a
-		}
-	}
-	i = i - 1
-	return sum(i, a)
 }
