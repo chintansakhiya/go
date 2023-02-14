@@ -1,39 +1,47 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-type point struct {
-	x int
-	y int
+type shape interface {
+	area() float32
 }
 
 type circle struct {
-	x       float64
-	pointer *point
+	r float32
 }
 
-func (i *circle) test(j float64) {
-
-	i.x = j
-
+type rect struct {
+	h float32
+	w float32
 }
+
+func (c circle) area() float32 {
+	return 2 * 3.1 * c.r
+}
+
+func (r rect) area() float32 {
+	return r.h * r.w
+}
+
 func main() {
 
-	u := circle{3.14, &point{5, 6}}
-	fmt.Println(*u.pointer, &u.pointer, u.pointer)
+	a := circle{10.2}
+	b := rect{10, 5}
+	c := circle{10.2}
+	d := circle{10.2}
+	e := circle{10.2}
+	f := circle{10.2}
+	g := circle{10.2}
+	h := circle{10.2}
 
-	fmt.Println(u.pointer, &u)
-	u.test(4.14)
+	// x := a.area()
+	// y := b.area()
+	// fmt.Println(x, y)
+	shapes := []shape{a, b, c, d, e, f, g, h}
 
-	fmt.Println(u)
+	for _, item := range shapes {
 
-}
-
-func for1(k []int) {
-	for i, item := range k {
-		fmt.Println("this is i", i, "this is item", item)
+		fmt.Println(item.area())
 	}
 
 }
