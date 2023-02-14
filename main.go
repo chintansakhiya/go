@@ -1,23 +1,38 @@
 package main
 
 import (
+	//"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
 
-	port := 8080
-	isstarted := startsserver(port)
-	fmt.Println(isstarted)
-	// r := mux.NewRouter()
-	// http.ListenAndServe(":3030", r)
+	a, perror := devide(6, 2)
+	if perror == nil {
+		fmt.Println("division is", a)
+	} else {
+		fmt.Println(a, perror)
+	}
 
 }
 
-func startsserver(p int) bool {
+type CustomError struct {
+	mess  string
+	value int
+}
 
-	fmt.Println("server started on ", p)
+func (c CustomError) Error() string {
+	fmt.Println("from error")
+	return c.mess + " " + strconv.Itoa(c.value)
 
-	return true
+}
 
+func devide(x, y float64) (float64, error) {
+
+	if y == 0 {
+		return x, CustomError{"this is error", -1}
+
+	}
+	return float64(x) / float64(y), nil
 }
