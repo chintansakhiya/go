@@ -1,47 +1,49 @@
 package main
 
-import "fmt"
-
-type shape interface {
-	area() float32
-}
-
-type circle struct {
-	r float32
-}
-
-type rect struct {
-	h float32
-	w float32
-}
-
-func (c circle) area() float32 {
-	return 2 * 3.1 * c.r
-}
-
-func (r rect) area() float32 {
-	return r.h * r.w
-}
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 func main() {
+	//var b bytes.Buffer
+	wg := &sync.WaitGroup{}
+	ch := make(chan int, 3)
 
-	a := circle{10.2}
-	b := rect{10, 5}
-	c := circle{10.2}
-	d := circle{10.2}
-	e := circle{10.2}
-	f := circle{10.2}
-	g := circle{10.2}
-	h := circle{10.2}
+	wg.Add(2)
+	go func(ch chan int, wg *sync.WaitGroup) {
+		fmt.Println(<-ch) //1
+		fmt.Println(<-ch) //2
+		fmt.Println(<-ch) //3
+		fmt.Println(<-ch) //4
+		fmt.Println(<-ch) //5
+		time.Sleep(1 * time.Second)
+		fmt.Println("from buffer")
+		for k := range ch {
 
-	// x := a.area()
-	// y := b.area()
-	// fmt.Println(x, y)
-	shapes := []shape{a, b, c, d, e, f, g, h}
+			fmt.Println(k)
+		}
 
-	for _, item := range shapes {
+		wg.Done()
+	}(ch, wg)
 
-		fmt.Println(item.area())
-	}
+	go func(ch chan int, wg *sync.WaitGroup) {
+
+		fmt.Println("Starting now")
+		ch <- 50
+		ch <- 52
+		ch <- 54
+		ch <- 56
+		ch <- 58
+		ch <- 60
+		// ch <- 62
+		// ch <- 64
+
+		close(ch)
+		fmt.Println("Closing now")
+		wg.Done()
+	}(ch, wg)
+	wg.Wait()
 
 }
