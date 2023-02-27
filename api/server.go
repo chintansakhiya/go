@@ -24,6 +24,7 @@ var item = &Item{ItemID: 1, ItemName: "rich dad poor dad", ItemType: "book"}
 func ProductsHandler(w http.ResponseWriter, r *http.Request) {
 
 	productsJson, err := json.Marshal(item)
+
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
